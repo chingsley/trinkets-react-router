@@ -1,12 +1,13 @@
 import React from 'react';
 import { Route, NavLink } from 'react-router-dom';
+import ItemDescription from './ItemDescription';
+import ItemShipping from './ItemShipping';
 
-import items from '../data';
 
 
 function Item(props) {
   const id = props.match.params.itemId;
-  const item = items.find(item => `${item.id}` === id);
+  const item = props.items.find(item => `${item.id}` === id);
 
   if(!item) {
     return <h2>Loading Data...</h2>;
@@ -23,9 +24,12 @@ function Item(props) {
           <h4>${item.price}</h4>
         </div>
       </div>
-      <div>
-        <p className="item-description">{item.description}</p>
-      </div>
+      <nav className="item-sub-nav">
+        <NavLink exact to={`/item-list/${id}`} activeClassName="active">Description</NavLink>
+        <NavLink to={`/item-list/${id}/shipping`} activeClassName="active">Shipping</NavLink>
+      </nav>
+      <Route exact path="/item-list/:itemId" render={props => <ItemDescription {...props} item={item} />} />
+      <Route path="/item-list/:itemId/shipping" render={props => <ItemShipping {...props} item={item} />} />
     </div>
   );
 }

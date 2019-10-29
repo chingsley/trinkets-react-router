@@ -28,12 +28,12 @@ class App extends React.Component {
           <h1 className="store-header">Kingsley's Trinkets</h1>
           <div className="nav-links">
             <NavLink exact to="/" activeClassName="active">Home</NavLink>
-            <NavLink to="/shop" activeClassName="active">Shop</NavLink>
+            <NavLink exact to="/item-list" activeClassName="active">Shop</NavLink>
           </div>
         </nav>
         <Route exact path="/" component={Home} />
-        <Route exact path="/shop" component={ItemList} />
-        <Route path="/shop/:itemId" component={Item} />
+        <Route exact path="/item-list" render={props => <ItemList {...props} items={this.state.items} />} />
+        <Route path="/item-list/:itemId" render={props => <Item {...props} items={this.state.items} />} />
       </div>
     );
   }
