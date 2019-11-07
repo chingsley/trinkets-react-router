@@ -92,10 +92,15 @@ nav {
   margin: 0 auto;
 }
 
+.item-wrapper .md-button {
+  margin-bottom: 24px;
+}
+
 .item-header {
   display: flex;
 }
 
+h2,
 .item-header h2,
 .item-header h4 {
   color: #1c5d76;
@@ -145,7 +150,7 @@ nav {
 
 .item-description {
   max-width: 720px;
-  margin: 10px auto;
+  margin: 32px auto;
 }
 
 /* material design button */
@@ -249,6 +254,11 @@ nav {
   opacity: 0;
 }
 
+form {
+  margin: 0 auto;
+  width: 300px;
+}
+
 input {
   border: 0;
   outline: none;
@@ -304,4 +314,8 @@ input {
 /* Crucial style rule */
 input:focus + .baseline:before {
   right: 0;
+}
+
+.form-button {
+  margin: 24px 0;
 }
