@@ -3,6 +3,7 @@ import { Route, NavLink } from 'react-router-dom';
 import axios from 'axios';
 import ItemDescription from './ItemDescription';
 import ItemShipping from './ItemShipping';
+import Info from './Info';
 
 
 
@@ -21,11 +22,23 @@ class Item extends Component {
       .catch(err => console.log(err));
   }
 
+  updateForm = e => {
+    e.preventDefault();
+    this.props.setUpdateForm(this.state.item);
+  }
+
+  deleteItem = e => {
+    e.preventDefault();
+    this.props.deleteItem(this.state.item.id);
+  };
+
   render() {
     const { item } = this.state;
 
     if (!this.state.item) {
-      return <h2>Loading Data...</h2>;
+      return (
+        <Info />
+      );
     }
 
     return (
@@ -45,6 +58,12 @@ class Item extends Component {
         </nav>
         <Route exact path="/item-list/:itemId" render={props => <ItemDescription {...props} item={item} />} />
         <Route path="/item-list/:itemId/shipping" render={props => <ItemShipping {...props} item={item} />} />
+        <button onClick={this.deleteItem} className="md-button">
+          Delete Item
+        </button>
+        <button onClick={this.updateForm} className="md-button">
+          Update Item
+        </button>
       </div>
     );
   }

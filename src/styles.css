@@ -84,6 +84,7 @@ nav {
 
 .item-list-image {
   width: 100%;
+  height: 60%;
   border: 1px solid lightgray;
 }
 
@@ -105,6 +106,13 @@ h2,
 .item-header h4 {
   color: #1c5d76;
   margin: 0;
+}
+
+.instruction {
+  font-weight: normal;
+  font-size: 18px;
+  margin-top: 1rem;
+  /* text-transform: capitalize; */
 }
 
 .item-header h4 {

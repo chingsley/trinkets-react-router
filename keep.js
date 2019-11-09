@@ -21,14 +21,14 @@ class App extends React.Component {
 
   componentDidMount() {
     axios.get('http://localhost:5000/items')
-    .then(res => {
-      const indexOfEdit = this.props.location.pathname.indexOf('/edit');
-      let activeItem = null;
-      if (indexOfEdit > -1 && !this.state.activeItem) {
-        const id = this.props.location.pathname[indexOfEdit - 1]
-        activeItem = res.data.find(item => `${item.id}` === `${id}`)
-        // this.setState({ activeItem: activeItem })
-      }
+      .then(res => {
+        const indexOfEdit = this.props.location.pathname.indexOf('/edit');
+        let activeItem = null;
+        if (indexOfEdit > -1 && !this.state.activeItem) {
+          const id = this.props.location.pathname[indexOfEdit - 1]
+          activeItem = res.data.find(item => `${item.id}` === `${id}`)
+          // this.setState({ activeItem: activeItem })
+        }
         this.setState({ items: res.data, activeItem: activeItem });
       })
       .catch(err => console.log(err))
@@ -43,7 +43,7 @@ class App extends React.Component {
         this.props.history.push('/item-list'); // we have access to 'history' here because we wrapped this App component with the 'withRouter' HOC (see the last line of code)
       })
       .catch(err => console.log(err));
-    
+
   };
 
 
@@ -59,7 +59,7 @@ class App extends React.Component {
 
   setUpdateForm = item => {
     this.setState({ activeItem: item });
-    this.props.history.push(`/item/${item.id}/edit`);
+    this.props.history.push(`/item-list/${item.id}/edit`);
   };
 
   deleteItem = id => {
@@ -88,6 +88,7 @@ class App extends React.Component {
         <Route exact path="/" component={Home} />
         <Route exact path="/item-list" render={props => <ItemList {...props} items={this.state.items} />} />
         <Route
+          exact
           path="/item-list/:itemId"
           render={props => (
             <Item
@@ -109,7 +110,7 @@ class App extends React.Component {
           )}
         />
         <Route
-          path="/item/:itemId/edit"
+          path="/item-list/:itemId/edit"
           render={props => (
             <UpdateForm
               {...props}
@@ -138,4 +139,3 @@ class App extends React.Component {
 }
 
 export default withRouter(App);
-// export default App;
